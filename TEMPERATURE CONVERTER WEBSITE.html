@@ -25,3 +25,91 @@
     <script src="script.js"></script>
 </body>
 </html>
+********************************************************************************************************************
+#style.css code
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.converter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, select, button {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #555;
+}
+********************************************************************************************************************
+#javascript code
+function convertTemperature() {
+    const temperatureInput = document.getElementById('temperatureInput').value;
+    const unitSelect = document.getElementById('unitSelect').value;
+    const resultDiv = document.getElementById('result');
+
+    // Validate input to ensure it is a number
+    if (isNaN(temperatureInput) || temperatureInput === '') {
+        resultDiv.innerHTML = "Please enter a valid number.";
+        return;
+    }
+
+    const temperature = parseFloat(temperatureInput);
+    let convertedTemperature;
+    let targetUnit;
+
+    // Conversion logic
+    if (unitSelect === 'celsius') {
+        convertedTemperature = `${(temperature * 9/5) + 32} °F (Fahrenheit) <br> ${(temperature + 273.15)} K (Kelvin)`;
+    } else if (unitSelect === 'fahrenheit') {
+        convertedTemperature = `${(temperature - 32) * 5/9} °C (Celsius) <br> ${((temperature - 32) * 5/9) + 273.15} K (Kelvin)`;
+    } else if (unitSelect === 'kelvin') {
+        convertedTemperature = `${temperature - 273.15} °C (Celsius) <br> ${(temperature - 273.15) * 9/5 + 32} °F (Fahrenheit)`;
+    }
+
+    // Display the result
+    resultDiv.innerHTML = `Converted Temperature: <br>${convertedTemperature}`;
+}
+
